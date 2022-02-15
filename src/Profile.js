@@ -22,7 +22,6 @@ export default class Profile extends Component {
           <button onClick={this.setDetails} className='btn btn-primary'>
             {this.state.showDetails ? 'Hide Details' : 'Display Details'}
           </button>
-
           {this.state.showDetails ? (
             <p className='card-text details'>{this.props.details}</p>
           ) : null}
