@@ -1,25 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Profile from './Profile';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Välkommen!
-        </p>
-        <a
-          className="App-link"
-          href="https://epochtimes.se/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Epoch Times Sverige
-        </a>
-      </header>
-    </div>
-  );
-}
-
+const App = () => 
+  <Profile
+    name="John Doe"
+    title="Team Lead"
+    details="This is my 5th year and I love helping others" 
+  />;
 export default App;
