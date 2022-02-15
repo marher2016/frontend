@@ -1,10 +1,6 @@
 import React from 'react';
-import Profile from './Profile';
+import EmployeeEmail from './EmployeeEmail';
 
 const App = () => 
-  <Profile
-    name="John Doe"
-    title="Team Lead"
-    details="This is my 5th year and I love helping others" 
-  />;
+  <EmployeeEmail/>;
 export default App;
