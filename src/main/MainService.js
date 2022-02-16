@@ -1,4 +1,4 @@
-import { Main } from "../model/Main";
+import { Main } from "./Main";
 
 export function MainService(main) {
   console.log(main)

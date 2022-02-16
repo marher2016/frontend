@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Component } from "react";
-import { Main } from "../model/Main";
+import { Main } from "./Main";
 import { MainService } from "./MainService"
 
 class MainController extends Component {
