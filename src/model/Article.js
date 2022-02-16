@@ -1,7 +1,7 @@
 export class Article {
-  constructor(header, main, image) {
+  constructor(header, headline, lead) {
     this.header = header
-    this.main = main
-    this.image = image
+    this.headline = headline
+    this.lead = lead
   }
 }

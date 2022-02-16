@@ -1,11 +1,13 @@
 import React from 'react';
-import MainController from './main/MainController';
+import UpdateComponent from './main/UpdateComponent';
 import './App.css';
+import ShowComponent from './main/ShowComponent';
 
 function App() {
   return (
-    <div className="main">
-      <MainController/>
+    <div className="app">
+      <UpdateComponent className="component"/>
+      <ShowComponent className="component"/>
     </div>
   )
 }
