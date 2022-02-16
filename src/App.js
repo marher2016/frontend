@@ -1,11 +1,11 @@
 import React from 'react';
-import Edit from './Edit';
+import MainController from './main/MainController';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Edit/>
+    <div className="main">
+      <MainController/>
     </div>
   )
 }

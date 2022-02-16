@@ -1,8 +1,9 @@
 import axios from "axios";
 import { Component } from "react";
-import { Main } from "./model/Main";
+import { Main } from "../model/Main";
+import { MainService } from "./MainService"
 
-class Edit extends Component {
+class MainController extends Component {
   
   constructor(props) {
     super(props)
@@ -15,11 +16,9 @@ class Edit extends Component {
   componentDidMount() {
     axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/6146')
     .then(response => {
-      const rdm = response.data.main
       this.setState({
-        main: new Main(rdm.headline, rdm.lead)
+        main: MainService(response.data.main)
       })
-      console.log(rdm)
     })
   }
 
@@ -33,4 +32,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit
+export default MainController
