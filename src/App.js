@@ -1,6 +1,13 @@
 import React from 'react';
-import EmployeeEmail from './EmployeeEmail';
+import Edit from './Edit';
+import './App.css';
 
-const App = () => 
-  <EmployeeEmail/>;
+function App() {
+  return (
+    <div className="App">
+      <Edit/>
+    </div>
+  )
+}
+
 export default App;
