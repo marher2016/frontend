@@ -20,7 +20,7 @@ class ShowComponent extends Component {
     /*if(typeof this.state.header !== "undefined") {
 
     }*/
-    axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/8268')
+    axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/9018')
     .then(response => {
       this.setState({
         header: response.data.header,

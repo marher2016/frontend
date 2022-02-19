@@ -36,36 +36,39 @@ class UpdateComponent extends Component {
     return (
       <form onSubmit={this.handleSubmit} className="bigfont">
         <div>
-          <label>Headline </label>
+          <label>Article Headline </label>
           <input 
             className="input"
             type="text" 
-            name="headline" 
+            name="headline"
+            placeholder="Enter headline here" 
             onChange= {this.handleChange}
             value={headline}>
           </input>
         </div>
         <div>
-          <label>Lead paragraph</label>
+          <label>-Lead paragraph </label>
           <input 
             className="input"
             type="text" 
             name="lead"
+            placeholder="Enter lead here"
             onChange= {this.handleChange}
             value={lead}>
           </input>
         </div>
         <div>
-          <label>Supporting paragraphs</label>
+          <label>Supporting paragraphs </label>
           <textarea 
             className="input"
             name="support"
+            placeholder="Enter supporting paragraphs here"
             onChange= {this.handleChange}
             value={support}>
           </textarea>
         </div>
         <div>
-          <button type="submit" className="input">Submit</button>
+          <button type="submit" className="input button">Submit</button>
         </div>
       </form>
     )
