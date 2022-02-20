@@ -16,23 +16,24 @@ class ShowComponent extends Component {
     }
   }
 
-  componentDidMount() {
-    /*if(typeof this.state.header !== "undefined") {
-
-    }*/
-    axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/9018')
-    .then(response => {
-      this.setState({
-        header: response.data.header,
-        headline: response.data.headline,
-        lead: response.data.lead,
-        support: response.data.support
-      })
-    })
+  async componentDidMount() {
+    try {
+      const response = await axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
+      if (response.status === 200) {
+        this.setState({
+          header: response.data.header,
+          headline: response.data.headline,
+          lead: response.data.lead,
+          support: response.data.support
+        });
+        return response;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="display-linebreaks">
         <h1 className="headline">{this.state.headline}</h1>
