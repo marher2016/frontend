@@ -19,15 +19,12 @@ class ShowComponent extends Component {
   async componentDidMount() {
     try {
       const response = await axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
-      if (response.status === 200) {
-        this.setState({
-          header: response.data.header,
-          headline: response.data.headline,
-          lead: response.data.lead,
-          support: response.data.support
-        });
-        return response;
-      }
+      this.setState({
+        header: response.data.header,
+        headline: response.data.headline,
+        lead: response.data.lead,
+        support: response.data.support
+      });
     } catch (error) {
       console.log(error);
     }

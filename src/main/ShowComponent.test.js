@@ -11,7 +11,7 @@ jest.mock("axios");
 afterEach(cleanup)
 configure({adapter: new Adapter()});
 
-it('will test axios for data', async () => {
+it('will give a good response', async () => {
   const response = {
     status: 200, data: { "header": {
       "subject": "EKONOMI",
@@ -27,6 +27,15 @@ it('will test axios for data', async () => {
   axios.get.mockImplementation(() => Promise.resolve(response))
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  //expect(wrapper.state('headline')).toBe(['Skärpta\nregler för\nreligiösa\ninslag i\nfriskolor\n'])
+  expect(axios.get).toHaveBeenCalledWith('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
+})
+
+it('user did a bad request', async () => {
+  const response = {
+    status: 400
+  }
+  axios.get.mockImplementation(() => Promise.reject(response))
+  const wrapper = shallow(<ShowComponent/>)
+  wrapper.instance().componentDidMount()
   expect(axios.get).toHaveBeenCalledWith('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
 })
