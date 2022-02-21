@@ -6,6 +6,7 @@ import PostComponent from "./PostComponent";
 import userEvent from '@testing-library/user-event'
 import {render, screen} from '@testing-library/react'
 import { Header } from '../model/Header';
+import user from '@testing-library/user-event'
 
 jest.mock("axios");
 afterEach(cleanup)
@@ -13,11 +14,11 @@ configure({adapter: new Adapter()});
 
 
 it('clicking "submit" submits article', async () => {
-  const response = {status: 200, data: { 
+  const response = {status: 200, data: {
     "header": {
-      "subject": 'EKONOMI', 
-      "year": 2022, 
-      "vignette": 'inrikes', 
+      "subject": 'EKONOMI',
+      "year": 2022,
+      "vignette": 'inrikes',
       "articleId": "2906"
     },
     "support": "\n",
@@ -30,8 +31,17 @@ it('clicking "submit" submits article', async () => {
   userEvent.click(screen.getByRole('button', {name: /submit/i}))
   expect(axios.post).toHaveBeenCalledWith('http://localhost:8181/v1/articles', {
     "header": new Header('EKONOMI', 2022, 'INRIKES', ''),
-    "headline": "", 
-    "lead": "", 
+    "headline": "",
+    "lead": "",
     "support": ""
   });
+})
+
+it('accepts an lead and displays to the screen', () => {
+  render(<PostComponent />)
+  const input = screen.getByRole('textbox', { name: /lead/i })
+
+  user.type(input, 'Regeringen föreslår att det ska bli tydligare krav och skärpta regler för religiösa inslag i förskolor, skolor och fritidshem. Bland annat handlar det om en noggrannare kontroll av huvudmännen.')
+
+  expect(screen.getByDisplayValue('Regeringen föreslår att det ska bli tydligare krav och skärpta regler för religiösa inslag i förskolor, skolor och fritidshem. Bland annat handlar det om en noggrannare kontroll av huvudmännen.')).toBeInTheDocument()
 })

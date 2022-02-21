@@ -52,6 +52,7 @@ class UpdateComponent extends Component {
             className="input"
             type="text" 
             name="lead"
+            aria-label="lead"
             placeholder="Enter lead here"
             onChange= {this.handleChange}
             value={lead}>
