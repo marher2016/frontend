@@ -1,7 +1,7 @@
 import React from 'react';
-import PostComponent from './main/PostComponent';
+import PostComponent from './post/PostComponent';
 import './App.css';
-import ShowComponent from './main/ShowComponent';
+import ShowComponent from './show/ShowComponent';
 
 function App() {
   return (
