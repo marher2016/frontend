@@ -17,7 +17,7 @@ class ShowComponent extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
+      const response = await axios.get('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5971');
       this.setState({
         header: response.data.header,
         article: new Article(response.data.headline, response.data.lead, response.data.support)

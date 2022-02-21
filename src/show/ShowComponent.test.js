@@ -1,11 +1,10 @@
 import React from 'react';
 import ShowComponent from "./ShowComponent";
 import {cleanup} from '@testing-library/react';
-import {shallow} from 'enzyme';
+import {shallow, configure} from 'enzyme';
 import axios from "axios";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import "../setupTests"
-import { configure } from 'enzyme'
 
 jest.mock("axios");
 afterEach(cleanup)
@@ -24,10 +23,10 @@ it('will give a good response', async () => {
     "lead": "Regeringen föreslår att det\nska bli tydligare krav och\nskärpta regler för religiösa\ninslag i förskolor, skolor\noch fritidshem. Bland annat\nhandlar det om en noggrannare\nkontroll av huvudmännen.\n",
     }
   }
-  axios.get.mockImplementation(() => Promise.resolve(response))
+  axios.get.mockResolvedValueOnce(response);
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  expect(axios.get).toHaveBeenCalledWith('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
+  expect(axios.get).toHaveBeenCalledWith('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5971');
 })
 
 it('user did a bad request', async () => {
@@ -37,5 +36,5 @@ it('user did a bad request', async () => {
   axios.get.mockImplementation(() => Promise.reject(response))
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  expect(axios.get).toHaveBeenCalledWith('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5122');
+  expect(axios.get).toHaveBeenCalledWith('http://localhost:8181/v1/articles/inrikes/2022/ekonomi/5971');
 })

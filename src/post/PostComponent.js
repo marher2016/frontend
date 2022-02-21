@@ -2,7 +2,6 @@ import { Component } from "react";
 import axios from "axios";
 import { Header } from "../model/Header";
 import './PostComponent.css';
-import { Article } from "../model/Article";
 
 class UpdateComponent extends Component {
 
@@ -11,19 +10,21 @@ class UpdateComponent extends Component {
 
     this.state = {
       header: new Header('EKONOMI', 2022, 'INRIKES', ''),
-      article: new Article('', '', '')
+      headline: '',
+      lead: '',
+      support: '',
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      [e.target.article.name]: e.target.article.value
+      [e.target.name]: e.target.value
     })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8181/v1/articles', this.state.article)
+    axios.post('http://localhost:8181/v1/articles', this.state)
     .then(response => {
       console.log(response)
       this.setState({header: response.data.header})
@@ -31,7 +32,7 @@ class UpdateComponent extends Component {
   }
 
   render() {
-    const {headline, lead, support} = this.state.article
+    const {headline, lead, support} = this.state
     return (
       <form onSubmit={this.handleSubmit} className="bigfont">
         <div>
@@ -67,7 +68,7 @@ class UpdateComponent extends Component {
           </textarea>
         </div>
         <div>
-          <button type="submit" className="input button">Submit</button>
+          <button type="submit" name="submit" className="input button">Submit</button>
         </div>
       </form>
     )
