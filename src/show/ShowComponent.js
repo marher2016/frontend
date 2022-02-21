@@ -1,10 +1,9 @@
-import axios from "axios";
+import Axios from "axios";
 import { Component } from "react";
 import { Article } from "../model/Article";
 import { Header } from "../model/Header";
 import './ShowComponent.css';
-import URL from '../environment/url'
-import ARTICLE from '../environment/article'
+import Environment from '../environment/Environment'
 
 class ShowComponent extends Component {
   
@@ -19,12 +18,14 @@ class ShowComponent extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get(URL + ARTICLE);
+      const response = await Axios.get(
+        Environment.BASE_URL + Environment.ARTICLE
+        );
       this.setState({
         header: response.data.header,
         article: new Article(
-            response.data.headline, 
-            response.data.lead, 
+            response.data.headline,
+            response.data.lead,
             response.data.support
           )
       });

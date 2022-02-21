@@ -1,13 +1,13 @@
 import {cleanup} from '@testing-library/react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { configure } from 'enzyme'
-import axios from "axios";
+import Axios from "axios";
 import PostComponent from "./PostComponent";
-import userEvent from '@testing-library/user-event'
+import UserEvent from '@testing-library/user-event'
 import {render, screen} from '@testing-library/react'
 import { Header } from '../model/Header';
-import user from '@testing-library/user-event'
-import url from '../environment/url'
+import User from '@testing-library/user-event'
+import Environment from '../environment/Environment'
 
 jest.mock("axios");
 afterEach(cleanup)
@@ -27,12 +27,12 @@ it('clicking "submit" submits article', async () => {
     "lead": "\n"
     }
   }
-  axios.post.mockResolvedValueOnce(response);
+  Axios.post.mockResolvedValueOnce(response);
   render(<PostComponent/>)
 
-  userEvent.click(screen.getByRole('button', {name: /submit/i}))
+  UserEvent.click(screen.getByRole('button', {name: /submit/i}))
 
-  expect(axios.post).toHaveBeenCalledWith(url, {
+  expect(Axios.post).toHaveBeenCalledWith(Environment.BASE_URL, {
     "header": new Header('EKONOMI', 2022, 'INRIKES', ''),
     "headline": "",
     "lead": "",
@@ -47,7 +47,7 @@ it('accepts an lead and displays to the screen', () => {
     'skärpta regler för religiösa inslag i förskolor, skolor och fritidshem. '
     + 'Bland annat handlar det om en noggrannare kontroll av huvudmännen.'
 
-  user.type(input, lead)
+  User.type(input, lead)
 
   expect(screen.getByDisplayValue(lead)).toBeInTheDocument()
 })

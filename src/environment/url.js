@@ -1,1 +1,0 @@
-export const url = 'http://localhost:8181/v1/articles'

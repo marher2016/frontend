@@ -2,11 +2,10 @@ import React from 'react';
 import ShowComponent from "./ShowComponent";
 import {cleanup} from '@testing-library/react';
 import {shallow, configure} from 'enzyme';
-import axios from "axios";
+import Axios from "axios";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import "../setupTests"
-import URL from '../environment/url'
-import ARTICLE from '../environment/article'
+import Environment from '../environment/Environment'
 
 jest.mock("axios");
 afterEach(cleanup)
@@ -55,18 +54,20 @@ it('will give a good response', async () => {
       + "kontroll av huvudmännen.\n",
     }
   }
-  axios.get.mockResolvedValueOnce(response);
+  Axios.get.mockResolvedValueOnce(response);
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  expect(axios.get).toHaveBeenCalledWith(URL + ARTICLE);
+  expect(Axios.get)
+    .toHaveBeenCalledWith(Environment.BASE_URL + Environment.ARTICLE);
 })
 
 it('user did a bad request', async () => {
   const response = {
     status: 400
   }
-  axios.get.mockImplementation(() => Promise.reject(response))
+  Axios.get.mockImplementation(() => Promise.reject(response))
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  expect(axios.get).toHaveBeenCalledWith(URL + ARTICLE);
+  expect(Axios.get)
+    .toHaveBeenCalledWith(Environment.BASE_URL + Environment.ARTICLE);
 })

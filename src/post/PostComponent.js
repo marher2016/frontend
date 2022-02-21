@@ -1,8 +1,8 @@
 import { Component } from "react";
-import axios from "axios";
+import Axios from "axios";
 import { Header } from "../model/Header";
 import './PostComponent.css';
-import url from '../environment/url'
+import Environment from '../environment/Environment'
 
 class PostComponent extends Component {
 
@@ -18,14 +18,12 @@ class PostComponent extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    this.setState({[e.target.name]: e.target.value})
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(url, this.state)
+    Axios.post(Environment.BASE_URL, this.state)
     .then(r => {
       this.setState({header: r.data.header})
     })
