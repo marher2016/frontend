@@ -2,8 +2,9 @@ import { Component } from "react";
 import axios from "axios";
 import { Header } from "../model/Header";
 import './PostComponent.css';
+import url from '../environment/url'
 
-class UpdateComponent extends Component {
+class PostComponent extends Component {
 
   constructor(props) {
     super(props)
@@ -24,17 +25,16 @@ class UpdateComponent extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8181/v1/articles', this.state)
-    .then(response => {
-      console.log(response)
-      this.setState({header: response.data.header})
+    axios.post(url, this.state)
+    .then(r => {
+      this.setState({header: r.data.header})
     })
   }
 
   render() {
     const {headline, lead, support} = this.state
     return (
-      <form onSubmit={this.handleSubmit} className="bigfont">
+      <form onSubmit={this.handleSubmit} className="form">
         <div>
           <label>Article Headline </label>
           <input 
@@ -69,11 +69,15 @@ class UpdateComponent extends Component {
           </textarea>
         </div>
         <div>
-          <button type="submit" name="submit" className="input button">Submit</button>
+          <button
+            type="submit"
+            name="submit"
+            className="input button"
+          >Submit</button>
         </div>
       </form>
     )
   }
 }
 
-export default UpdateComponent
+export default PostComponent

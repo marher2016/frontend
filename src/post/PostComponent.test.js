@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event'
 import {render, screen} from '@testing-library/react'
 import { Header } from '../model/Header';
 import user from '@testing-library/user-event'
+import url from '../environment/url'
 
 jest.mock("axios");
 afterEach(cleanup)
@@ -28,8 +29,10 @@ it('clicking "submit" submits article', async () => {
   }
   axios.post.mockResolvedValueOnce(response);
   render(<PostComponent/>)
+
   userEvent.click(screen.getByRole('button', {name: /submit/i}))
-  expect(axios.post).toHaveBeenCalledWith('http://localhost:8181/v1/articles', {
+
+  expect(axios.post).toHaveBeenCalledWith(url, {
     "header": new Header('EKONOMI', 2022, 'INRIKES', ''),
     "headline": "",
     "lead": "",
@@ -40,8 +43,11 @@ it('clicking "submit" submits article', async () => {
 it('accepts an lead and displays to the screen', () => {
   render(<PostComponent />)
   const input = screen.getByRole('textbox', { name: /lead/i })
+  const lead = 'Regeringen föreslår att det ska bli tydligare krav och ' +
+    'skärpta regler för religiösa inslag i förskolor, skolor och fritidshem. '
+    + 'Bland annat handlar det om en noggrannare kontroll av huvudmännen.'
 
-  user.type(input, 'Regeringen föreslår att det ska bli tydligare krav och skärpta regler för religiösa inslag i förskolor, skolor och fritidshem. Bland annat handlar det om en noggrannare kontroll av huvudmännen.')
+  user.type(input, lead)
 
-  expect(screen.getByDisplayValue('Regeringen föreslår att det ska bli tydligare krav och skärpta regler för religiösa inslag i förskolor, skolor och fritidshem. Bland annat handlar det om en noggrannare kontroll av huvudmännen.')).toBeInTheDocument()
+  expect(screen.getByDisplayValue(lead)).toBeInTheDocument()
 })
