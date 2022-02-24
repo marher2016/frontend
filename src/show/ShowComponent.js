@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 import { Component } from "react";
 import { Article } from "../model/Article";
 import { Header } from "../model/Header";
@@ -18,7 +18,7 @@ class ShowComponent extends Component {
 
   async componentDidMount() {
     try {
-      const response = await Axios.get(
+      const response = await axios.get(
         Environment.BASE_URL + Environment.ARTICLE
         );
       this.setState({

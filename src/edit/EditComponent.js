@@ -1,6 +1,7 @@
 import { Component } from "react";
 import axios from "axios";
 import Environment from '../environment/Environment'
+import './EditComponent.css';
 
 class EditComponent extends Component {
 
@@ -50,7 +51,7 @@ class EditComponent extends Component {
           </input>
         </div>
         <div>
-          <label>Supporting paragraphs </label>
+          <label>-Supporting paragraphs </label>
           <textarea
             className="input"
             name="support"

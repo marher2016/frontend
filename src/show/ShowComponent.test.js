@@ -2,7 +2,7 @@ import React from 'react';
 import ShowComponent from "./ShowComponent";
 import {cleanup} from '@testing-library/react';
 import {shallow, configure} from 'enzyme';
-import Axios from "axios";
+import axios from "axios";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import "../setupTests"
 import Environment from '../environment/Environment'
@@ -54,10 +54,10 @@ it('will give a good response', async () => {
       + "kontroll av huvudmännen.\n",
     }
   }
-  Axios.get.mockResolvedValueOnce(response);
+  axios.get.mockResolvedValueOnce(response);
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  expect(Axios.get)
+  expect(axios.get)
     .toHaveBeenCalledWith(Environment.BASE_URL + Environment.ARTICLE);
 })
 
@@ -65,9 +65,9 @@ it('user did a bad request', async () => {
   const response = {
     status: 400
   }
-  Axios.get.mockImplementation(() => Promise.reject(response))
+  axios.get.mockImplementation(() => Promise.reject(response))
   const wrapper = shallow(<ShowComponent/>)
   wrapper.instance().componentDidMount()
-  expect(Axios.get)
+  expect(axios.get)
     .toHaveBeenCalledWith(Environment.BASE_URL + Environment.ARTICLE);
 })
