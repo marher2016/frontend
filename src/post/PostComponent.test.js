@@ -1,7 +1,7 @@
 import {cleanup} from '@testing-library/react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { configure } from 'enzyme'
-import Axios from "axios";
+import axios from "axios";
 import PostComponent from "./PostComponent";
 import UserEvent from '@testing-library/user-event'
 import {render, screen} from '@testing-library/react'
@@ -27,12 +27,12 @@ it('clicking "submit" submits article', async () => {
     "lead": "\n"
     }
   }
-  Axios.post.mockResolvedValueOnce(response);
+  axios.post.mockResolvedValueOnce(response);
   render(<PostComponent/>)
 
   UserEvent.click(screen.getByRole('button', {name: /submit/i}))
 
-  expect(Axios.post).toHaveBeenCalledWith(Environment.BASE_URL, {
+  expect(axios.post).toHaveBeenCalledWith(Environment.BASE_URL, {
     "header": new Header('EKONOMI', 2022, 'INRIKES', ''),
     "headline": "",
     "lead": "",

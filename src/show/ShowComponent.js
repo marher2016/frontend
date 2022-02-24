@@ -25,7 +25,7 @@ class ShowComponent extends Component {
         header: response.data.header,
         article: new Article(
             response.data.headline,
-            response.data.lead,
+            response.data.leader,
             response.data.support
           )
       });
@@ -38,7 +38,7 @@ class ShowComponent extends Component {
     return (
       <div className="article">
         <h1 className="headline">{this.state.article.headline}</h1>
-        <strong>{this.state.article.lead}</strong>
+        <strong>{this.state.article.leader}</strong>
         <pre>{this.state.article.support}</pre>
       </div>
     )

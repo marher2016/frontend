@@ -1,16 +1,13 @@
 import { Component } from "react";
 import Axios from "axios";
-import { Header } from "../model/Header";
-import './PostComponent.css';
 import Environment from '../environment/Environment'
 
-class PostComponent extends Component {
+class EditComponent extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      header: new Header('EKONOMI', 2022, 'INRIKES', ''),
       headline: '',
       leader: '',
       support: '',
@@ -22,9 +19,8 @@ class PostComponent extends Component {
   }
 
   handleSubmit = (e) => {
-    Axios.post(Environment.BASE_URL, this.state)
+    Axios.put(Environment.BASE_URL + Environment.ARTICLE, this.state)
     .then(r => {
-      this.setState({header: r.data.header})
       console.log(r)
     })
   }
@@ -50,7 +46,7 @@ class PostComponent extends Component {
             className="input"
             type="text" 
             name="leader"
-            aria-label="lead"
+            aria-label="leader"
             placeholder="Enter lead here"
             onChange= {this.handleChange}
             value={leader}>
@@ -61,6 +57,7 @@ class PostComponent extends Component {
           <textarea 
             className="input"
             name="support"
+            aria-label="support"
             placeholder="Enter supporting paragraphs here"
             onChange= {this.handleChange}
             value={support}>
@@ -78,4 +75,4 @@ class PostComponent extends Component {
   }
 }
 
-export default PostComponent
+export default EditComponent
