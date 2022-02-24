@@ -15,7 +15,7 @@ it('will give a good response', async () => {
   const response = {
     status: 200, data: { "header": {
       "subject": "EKONOMI",
-      "year": 2022,
+      "pubYear": 2022,
       "vignette": "inrikes",
       "articleId": "5122"
     },
@@ -48,7 +48,7 @@ it('will give a good response', async () => {
       + "skärpta regler för religiösa\ninslag i skolor föreslås träda\n"
       + "i kraft den 1 januari 2023.\n",
     "headline": "Skärpta\nregler för\nreligiösa\ninslag i\nfriskolor\n",
-    "lead": "Regeringen föreslår att det\nska bli tydligare krav och\n"
+    "leader": "Regeringen föreslår att det\nska bli tydligare krav och\n"
       + "skärpta regler för religiösa\ninslag i förskolor, skolor\n"
       + "och fritidshem. Bland annat\nhandlar det om en noggrannare\n"
       + "kontroll av huvudmännen.\n",

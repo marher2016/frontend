@@ -25,7 +25,6 @@ class PostComponent extends Component {
     Axios.post(Environment.BASE_URL, this.state)
     .then(r => {
       this.setState({header: r.data.header})
-      console.log(r)
     })
   }
 
@@ -50,7 +49,7 @@ class PostComponent extends Component {
             className="input"
             type="text" 
             name="leader"
-            aria-label="lead"
+            aria-label="leader"
             placeholder="Enter lead here"
             onChange= {this.handleChange}
             value={leader}>

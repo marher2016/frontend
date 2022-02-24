@@ -30,7 +30,7 @@ class ShowComponent extends Component {
           )
       });
     } catch (error) {
-      console.log(error);
+      //during rendering
     }
   }
 

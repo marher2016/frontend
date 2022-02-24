@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Axios from "axios";
+import axios from "axios";
 import Environment from '../environment/Environment'
 
 class EditComponent extends Component {
@@ -19,10 +19,7 @@ class EditComponent extends Component {
   }
 
   handleSubmit = (e) => {
-    Axios.put(Environment.BASE_URL + Environment.ARTICLE, this.state)
-    .then(r => {
-      console.log(r)
-    })
+    axios.put(Environment.BASE_URL + Environment.ARTICLE, this.state)
   }
 
   render() {
@@ -31,20 +28,20 @@ class EditComponent extends Component {
       <form onSubmit={this.handleSubmit} className="form">
         <div>
           <label>Article Headline </label>
-          <input 
+          <input
             className="input"
-            type="text" 
+            type="text"
             name="headline"
-            placeholder="Enter headline here" 
+            placeholder="Enter headline here"
             onChange= {this.handleChange}
             value={headline}>
           </input>
         </div>
         <div>
           <label>-Lead paragraph </label>
-          <input 
+          <input
             className="input"
-            type="text" 
+            type="text"
             name="leader"
             aria-label="leader"
             placeholder="Enter lead here"
@@ -54,7 +51,7 @@ class EditComponent extends Component {
         </div>
         <div>
           <label>Supporting paragraphs </label>
-          <textarea 
+          <textarea
             className="input"
             name="support"
             aria-label="support"
