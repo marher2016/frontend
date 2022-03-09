@@ -1,8 +1,16 @@
 .app {
   text-align: left;
-  height: 1500px;
   align-items: center;
   justify-content: center;
   display: flex;
+  justify-content: space-around;
+}
+
+.left {
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   justify-content: space-around;
 }
