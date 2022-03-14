@@ -1,8 +1,7 @@
 import { Component } from "react";
 import Axios from "axios";
-import { Header } from "../model/Header";
-import './PostComponent.css';
-import Environment from '../environment/Environment'
+import { Header } from "../../../model/Header";
+import Environment from '../../../environment/Environment'
 
 class PostComponent extends Component {
 

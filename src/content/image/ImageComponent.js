@@ -13,12 +13,11 @@ class ImageComponent extends Component {
       headers: {
         "Content-Type": "multipart/form-data"
       }
-    }).then(() => {
-      console.log("file uploaded successfully!")
+    }).then((response) => {
+      console.log(response)
     }).catch(function (error) {
       if (error.response) {
-        console.log(error.response)
-        //alert('Bad file: ' + error.response.data.message);
+        alert('Bad file: ' + error.response.data.message);
       } else if (error.request) {
         alert('No response: ' + error.request);
       } else {
@@ -31,7 +30,7 @@ class ImageComponent extends Component {
     return (
       <Dropzone onDrop={this.onDrop}>
         {({getRootProps, getInputProps, isDragActive}) => (
-            <div {...getRootProps()} className="dropbox">
+            <div {...getRootProps()} className="dropbox" role="region" name="dropbox">
               <input {...getInputProps()} />
               { isDragActive ?
                 <p>Drop the image here ...</p> :

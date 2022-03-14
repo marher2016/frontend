@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Component } from "react";
-import { Article } from "../model/Article";
-import { Header } from "../model/Header";
+import { Article } from "../../model/Article";
+import { Header } from "../../model/Header";
 import './ShowComponent.css';
-import Environment from '../environment/Environment'
+import Environment from '../../environment/Environment'
 
 class ShowComponent extends Component {
   
@@ -35,11 +35,12 @@ class ShowComponent extends Component {
   }
 
   render() {
+    const {headline, leader, support} = this.state.article
     return (
       <div className="article">
-        <h1 className="headline">{this.state.article.headline}</h1>
-        <strong>{this.state.article.leader}</strong>
-        <pre>{this.state.article.support}</pre>
+        <h1 className="headline">{headline}</h1>
+        <strong>{leader}</strong>
+        <pre>{support}</pre>
       </div>
     )
   }

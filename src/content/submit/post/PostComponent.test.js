@@ -5,9 +5,9 @@ import axios from "axios";
 import PostComponent from "./PostComponent";
 import UserEvent from '@testing-library/user-event'
 import {render, screen} from '@testing-library/react'
-import { Header } from '../model/Header';
+import { Header } from '../../../model/Header';
 import User from '@testing-library/user-event'
-import Environment from '../environment/Environment'
+import Environment from '../../../environment/Environment'
 
 jest.mock("axios");
 configure({adapter: new Adapter()});

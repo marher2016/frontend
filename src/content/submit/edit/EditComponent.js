@@ -1,7 +1,6 @@
 import { Component } from "react";
 import axios from "axios";
-import Environment from '../environment/Environment'
-import './EditComponent.css';
+import Environment from '../../../environment/Environment'
 
 class EditComponent extends Component {
 
