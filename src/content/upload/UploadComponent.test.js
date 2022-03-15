@@ -4,7 +4,7 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import {act, fireEvent, render, waitFor} from '@testing-library/react'
 import {shallow, configure} from 'enzyme';
-import ImageComponent from "./ImageComponent";
+import ImageComponent from "./UploadComponent";
 import {cleanup} from '@testing-library/react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import axios from "axios";

@@ -2,8 +2,8 @@ import axios from "axios";
 import { Component } from "react";
 import { Article } from "../../model/Article";
 import { Header } from "../../model/Header";
-import './ShowComponent.css';
-import Environment from '../../environment/Environment'
+import TextComponent from "./text/TextComponent";
+import ImageComponent from "./image/ImageComponent";
 
 class ShowComponent extends Component {
   
@@ -12,15 +12,15 @@ class ShowComponent extends Component {
 
     this.state = {
       header: Header,
-      article: Article
+      article: Article,
+      images: []
     }
   }
 
   async componentDidMount() {
+    const env = this.props.environment
     try {
-      const response = await axios.get(
-        Environment.BASE_URL + Environment.ARTICLE
-        );
+      const response = await axios.get(env.ARTICLES + env.ARTICLE);
       this.setState({
         header: response.data.header,
         article: new Article(
@@ -30,17 +30,25 @@ class ShowComponent extends Component {
           )
       });
     } catch (error) {
-      //during rendering
+      console.log(error)
     }
   }
 
+  async componentDidUpdate() {
+    if(this.state.images.length === 0) {
+      fetch("http://localhost:8282/v1/images")
+      .then(response => response.json())
+      .then(images => this.setState({images}))
+      .catch(error => console.log(error))
+    } else
+      console.log(this.state.images)
+  }
+
   render() {
-    const {headline, leader, support} = this.state.article
     return (
-      <div className="article">
-        <h1 className="headline">{headline}</h1>
-        <strong>{leader}</strong>
-        <pre>{support}</pre>
+      <div className="column">
+        <ImageComponent images={this.state.images} />
+        <TextComponent article={this.state.article} />
       </div>
     )
   }

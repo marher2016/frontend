@@ -1,5 +1,5 @@
 import React from 'react';
-import ShowComponent from "./ShowComponent";
+import ShowComponent from "../ShowComponent";
 import {cleanup} from '@testing-library/react';
 import {shallow, configure} from 'enzyme';
 import axios from "axios";

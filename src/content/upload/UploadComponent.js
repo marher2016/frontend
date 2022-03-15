@@ -1,15 +1,16 @@
 import axios from "axios";
 import { Component } from "react";
 import Dropzone from 'react-dropzone'
-import './ImageComponent.css';
+import './UploadComponent.css';
 
-class ImageComponent extends Component {
+class UploadComponent extends Component {
 
   onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0]
     const formData = new FormData()
     formData.append("file", file)
-    axios.post('http://localhost:8282/v1/images/inrikes/2022/ekonomi/1617', formData, {
+    const env = this.props.environment
+    axios.post(env.IMAGES + env.ARTICLE, formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
@@ -43,4 +44,4 @@ class ImageComponent extends Component {
   }
 }
 
-export default ImageComponent
+export default UploadComponent

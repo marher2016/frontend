@@ -1,17 +1,7 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import './SubmitComponent.css';
 
-class SubmitComponent extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      headline: '',
-      leader: '',
-      support: '',
-    }
-  }
+class SubmitComponent extends PureComponent {
 
   render() {
     const {headline, leader, support} = this.props.state

@@ -1,7 +1,7 @@
 import {setupServer} from 'msw/node'
 import {rest} from 'msw'
 import {render, fireEvent, screen} from '@testing-library/react'
-import ImageComponent from './ImageComponent'
+import ImageComponent from './UploadComponent'
 
 const server = setupServer(
   rest.post('', (req, res, ctx) => {
