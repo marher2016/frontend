@@ -9,8 +9,10 @@ class UploadComponent extends Component {
     const file = acceptedFiles[0]
     const formData = new FormData()
     formData.append("file", file)
-    const env = this.props.environment
-    axios.post(env.IMAGES + env.ARTICLE, formData, {
+    const {environment, header} = this.props
+    const endpoint = {environment}.IMAGES + '/' + {header}.vignette + '/' + 
+      {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
+    axios.post(endpoint, formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }

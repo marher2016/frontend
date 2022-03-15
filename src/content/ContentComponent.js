@@ -26,19 +26,20 @@ class ContentComponent extends Component {
   }
 
   handleSubmit = (e) => {
-    const a = Environment.ARTICLE;
+    const {header, headline, leader, support} = this.state
     const existing = {
-      headline: this.state.headline,
-      leader: this.state.leader,
-      support: this.state.support,
+      headline: {headline},
+      leader: {leader},
+      support: {support},
     }
-    if(a.length > 0){
-      axios.put(Environment.ARTICLES + a, existing)
+    const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' + 
+      {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
+    if({header}.header.articleId > 0){
+      axios.put(endpoint, existing)
     } else {
-      const h = this.state.header
-      if (h.articleId.length > 0)
-        axios.put(Environment.ARTICLES + '/' + h.vignette + '/' + h.pubYear +
-          '/' + h.subject + '/' + h.articleId, existing)
+      if ({header}.articleId.length > 0) {
+        axios.put(endpoint, existing)
+      }
       else 
         this.handleNew()
     }
@@ -56,7 +57,7 @@ class ContentComponent extends Component {
     return (
     <div className="row">
       <div className="left column">
-        <UploadComponent environment={Environment}/>
+        <UploadComponent environment={Environment} header={this.state.header}/>
         <SubmitComponent state={state} onChange={handleChange} 
           onSubmit={handleSubmit}/>
       </div>

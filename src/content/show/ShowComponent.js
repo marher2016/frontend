@@ -18,19 +18,24 @@ class ShowComponent extends Component {
   }
 
   async componentDidMount() {
-    const env = this.props.environment
-    try {
-      const response = await axios.get(env.ARTICLES + env.ARTICLE);
-      this.setState({
-        header: response.data.header,
-        article: new Article(
-            response.data.headline,
-            response.data.leader,
-            response.data.support
-          )
-      });
-    } catch (error) {
-      console.log(error)
+    const {header} = this.state
+    if({header}.articleId > 0) {
+      try {
+        const endpoint = this.props.environment.ARTICLES + '/' + 
+          {header}.vignette + '/' + {header}.pubYear + '/' + 
+          {header}.subject + '/' + {header}.articleId
+        const response = await axios.get(endpoint);
+        this.setState({
+          header: response.data.header,
+          article: new Article(
+              response.data.headline,
+              response.data.leader,
+              response.data.support
+            )
+        });
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
