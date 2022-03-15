@@ -26,23 +26,22 @@ class ContentComponent extends Component {
   }
 
   handleSubmit = (e) => {
+    if (this.state.header.articleId.length > 0)
+      this.handleOld()
+    else 
+      this.handleNew()
+  }
+
+  handleOld() {
     const {header, headline, leader, support} = this.state
+    const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' + 
+    {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
     const existing = {
       headline: {headline},
       leader: {leader},
       support: {support},
     }
-    const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' + 
-      {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
-    if({header}.header.articleId > 0){
-      axios.put(endpoint, existing)
-    } else {
-      if ({header}.articleId.length > 0) {
-        axios.put(endpoint, existing)
-      }
-      else 
-        this.handleNew()
-    }
+    axios.put(endpoint, existing)
   }
 
   handleNew() {

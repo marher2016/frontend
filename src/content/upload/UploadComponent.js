@@ -6,27 +6,31 @@ import './UploadComponent.css';
 class UploadComponent extends Component {
 
   onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0]
-    const formData = new FormData()
-    formData.append("file", file)
     const {environment, header} = this.props
-    const endpoint = {environment}.IMAGES + '/' + {header}.vignette + '/' + 
-      {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
-    axios.post(endpoint, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    }).then((response) => {
-      console.log(response)
-    }).catch(function (error) {
-      if (error.response) {
-        alert('Bad file: ' + error.response.data.message);
-      } else if (error.request) {
-        alert('No response: ' + error.request);
-      } else {
-        alert('Error during setup: ', error.message);
-      }
-    })
+    if({header}.articleId > 0) {
+      const file = acceptedFiles[0]
+      const formData = new FormData()
+      formData.append("file", file)
+      const endpoint = {environment}.IMAGES + '/' + {header}.vignette + '/' + 
+        {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
+      axios.post(endpoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then((response) => {
+        console.log(response)
+      }).catch(function (error) {
+        if (error.response) {
+          alert('Bad file: ' + error.response.data.message);
+        } else if (error.request) {
+          alert('No response: ' + error.request);
+        } else {
+          alert('Error during setup: ', error.message);
+        }
+      })
+    } else {
+      alert('Create an article first!')
+    }
   }
 
   render() {
