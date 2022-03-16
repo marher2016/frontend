@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Component } from "react";
 import { Article } from "../../model/Article";
-import { Header } from "../../model/Header";
 import TextComponent from "./text/TextComponent";
 import ImageComponent from "./image/ImageComponent";
+import '../../App.css';
 
 class ShowComponent extends Component {
   
@@ -11,14 +11,13 @@ class ShowComponent extends Component {
     super(props)
 
     this.state = {
-      header: Header,
       article: Article,
       images: []
     }
   }
 
   async componentDidMount() {
-    const {header} = this.state
+    const {header} = this.props.header
     if({header}.articleId > 0) {
       try {
         const endpoint = this.props.environment.ARTICLES + '/' + 
@@ -26,7 +25,6 @@ class ShowComponent extends Component {
           {header}.subject + '/' + {header}.articleId
         const response = await axios.get(endpoint);
         this.setState({
-          header: response.data.header,
           article: new Article(
               response.data.headline,
               response.data.leader,
@@ -41,7 +39,7 @@ class ShowComponent extends Component {
 
   async componentDidUpdate() {
     if(this.state.images.length === 0) {
-      fetch("http://localhost:8282/v1/images")
+      fetch(this.props.environment.IMAGES)
       .then(response => response.json())
       .then(images => this.setState({images}))
       .catch(error => console.log(error))

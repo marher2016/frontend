@@ -1,6 +1,7 @@
 import React from 'react';
 import SubmitComponent from './submit/SubmitComponent';
 import './ContentComponent.css';
+import '../App.css';
 import ShowComponent from './show/ShowComponent';
 import UploadComponent from './upload/UploadComponent'
 import { Component } from 'react';
@@ -28,13 +29,13 @@ class ContentComponent extends Component {
   handleSubmit = (e) => {
     if (this.state.header.articleId.length > 0)
       this.handleOld()
-    else 
+    else
       this.handleNew()
   }
 
   handleOld() {
     const {header, headline, leader, support} = this.state
-    const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' + 
+    const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' +
     {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
     const existing = {
       headline: {headline},
@@ -53,14 +54,15 @@ class ContentComponent extends Component {
 
   render() {
     const {handleChange, handleSubmit, state} = this
+    const {header} = state.header
     return (
     <div className="row">
       <div className="left column">
-        <UploadComponent environment={Environment} header={this.state.header}/>
+        <UploadComponent environment={Environment} header={header}/>
         <SubmitComponent state={state} onChange={handleChange} 
           onSubmit={handleSubmit}/>
       </div>
-      <ShowComponent onSubmit={handleSubmit} environment={Environment}/>
+      <ShowComponent header={header} environment={Environment}/>
     </div>
     )
   }

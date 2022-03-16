@@ -9,11 +9,3 @@
 .left {
   height: 1000px;
 }
-
-.column {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-content: space-around;
-}
