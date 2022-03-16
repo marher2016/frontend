@@ -6,38 +6,38 @@ import './UploadComponent.css';
 class UploadComponent extends Component {
 
   onDrop = (acceptedFiles) => {
-    const {environment, header} = this.props
-    if({header}.articleId > 0) {
-      const file = acceptedFiles[0]
-      const formData = new FormData()
-      formData.append("file", file)
-      const endpoint = {environment}.IMAGES + '/' + {header}.vignette + '/' + 
-        {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
-      axios.post(endpoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      }).then((response) => {
-        console.log(response)
-      }).catch(function (error) {
-        if (error.response) {
-          alert('Bad file: ' + error.response.data.message);
-        } else if (error.request) {
-          alert('No response: ' + error.request);
-        } else {
-          alert('Error during setup: ', error.message);
-        }
-      })
-    } else {
+    if(this.props.header.articleId > 0)
+      this.postImage(acceptedFiles[0])
+    else
       alert('Create an article first!')
-    }
+  }
+
+  postImage(file) {
+    const formData = new FormData()
+    formData.append("file", file)
+    const {baseUrl, header} = this.props
+    const endpoint = {baseUrl} + '/' + {header}.vignette + '/' +
+      {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
+    axios.post(endpoint, formData, { 
+        headers: { "Content-Type": "multipart/form-data"}
+      }).then((response) => { console.log(response) }
+      ).catch(function (error) {
+      if (error.response) {
+        alert('Bad file: ' + error.response.data.message);
+      } else if (error.request) {
+        alert('No response: ' + error.request);
+      } else {
+        alert('Error during setup: ', error.message);
+      }
+    })
   }
 
   render() {
     return (
       <Dropzone onDrop={this.onDrop}>
         {({getRootProps, getInputProps, isDragActive}) => (
-            <div {...getRootProps()} className="dropbox" role="region" name="dropbox">
+            <div {...getRootProps()} className="dropbox" 
+              role="region" name="dropbox">
               <input {...getInputProps()} />
               { isDragActive ?
                 <p>Drop the image here ...</p> :

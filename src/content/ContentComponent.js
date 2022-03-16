@@ -8,6 +8,7 @@ import { Component } from 'react';
 import axios from "axios";
 import Environment from '../environment/Environment'
 import { Header } from "../model/Header";
+import { Article } from '../model/Article';
 
 class ContentComponent extends Component {
 
@@ -16,9 +17,7 @@ class ContentComponent extends Component {
 
     this.state = {
       header: new Header('ekonomi', 2022, 'inrikes', ''),
-      headline: '',
-      leader: '',
-      support: '',
+      article: Article
     }
   }
 
@@ -34,15 +33,10 @@ class ContentComponent extends Component {
   }
 
   handleOld() {
-    const {header, headline, leader, support} = this.state
+    const {header, article} = this.state
     const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' +
     {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
-    const existing = {
-      headline: {headline},
-      leader: {leader},
-      support: {support},
-    }
-    axios.put(endpoint, existing)
+    axios.put(endpoint, article)
   }
 
   handleNew() {
@@ -54,12 +48,12 @@ class ContentComponent extends Component {
 
   render() {
     const {handleChange, handleSubmit, state} = this
-    const {header} = state.header
+    const {header, article} = state
     return (
     <div className="row">
       <div className="left column">
-        <UploadComponent environment={Environment} header={header}/>
-        <SubmitComponent state={state} onChange={handleChange} 
+        <UploadComponent header={header} baseUrl={Environment.IMAGES}/>
+        <SubmitComponent article={article} onChange={handleChange}
           onSubmit={handleSubmit}/>
       </div>
       <ShowComponent header={header} environment={Environment}/>

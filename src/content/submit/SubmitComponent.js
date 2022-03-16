@@ -4,8 +4,7 @@ import './SubmitComponent.css';
 class SubmitComponent extends PureComponent {
 
   render() {
-    const {headline, leader, support} = this.props.state
-    const {onChange, onSubmit} = this.props
+    const {article, onChange, onSubmit} = this.props
     return (
       <form onSubmit={onSubmit} className="form">
         <div>
@@ -16,7 +15,7 @@ class SubmitComponent extends PureComponent {
             name="headline"
             placeholder="Enter headline here"
             onChange= {onChange}
-            value={headline}>
+            value={article.headline}>
           </input>
         </div>
         <div>
@@ -28,7 +27,7 @@ class SubmitComponent extends PureComponent {
             aria-label="leader"
             placeholder="Enter lead here"
             onChange= {onChange}
-            value={leader}>
+            value={article.leader}>
           </input>
         </div>
         <div>
@@ -39,7 +38,7 @@ class SubmitComponent extends PureComponent {
             aria-label="support"
             placeholder="Enter supporting paragraphs here"
             onChange= {onChange}
-            value={support}>
+            value={article.support}>
           </textarea>
         </div>
         <div>
