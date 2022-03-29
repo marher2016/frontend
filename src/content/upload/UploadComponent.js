@@ -5,18 +5,12 @@ import './UploadComponent.css';
 
 class UploadComponent extends Component {
 
-  onDrop = (acceptedFiles) => {
-    if(this.articleWasCreated())
-      this.postImage(acceptedFiles[0])
-    else
-      alert('Create an article first!')
+  async componentDidUpdate() {
+    this.forceUpdate()
   }
 
-  articleWasCreated() {
-    if(this.props.header.articleId > 0)
-      return true
-    else 
-      return false
+  onDrop = (acceptedFiles) => {
+    this.postImage(acceptedFiles[0])
   }
 
   postImage(file) {
@@ -40,23 +34,23 @@ class UploadComponent extends Component {
   }
 
   render() {
-    const isCreated = this.articleWasCreated
+    const isCreated = this.props.header.articleId > 0
     return (
       <>
         {isCreated 
-          ? <h1>Article not yet saved</h1>
-          : <Dropzone onDrop={this.onDrop}>
-            {({getRootProps, getInputProps, isDragActive}) => (
-              <div {...getRootProps()} className="dropbox"
-                  role="region" name="dropbox">
-                <input {...getInputProps()} />
-                { isDragActive ?
-                  <p>Drop the image here ...</p> :
-                  <p>Drag 'n' drop image here, or click to select image</p>
-                }
-              </div>
-            )}
-          </Dropzone>
+          ? <Dropzone onDrop={this.onDrop}>
+          {({getRootProps, getInputProps, isDragActive}) => (
+            <div {...getRootProps()} className="dropbox"
+                role="region" name="dropbox">
+              <input {...getInputProps()} />
+              { isDragActive ?
+                <p>Drop the image here ...</p> :
+                <p>Drag 'n' drop image here, or click to select image</p>
+              }
+            </div>
+          )}
+        </Dropzone>
+          : <h1>Article not yet saved</h1>
         }
       </>
     )
