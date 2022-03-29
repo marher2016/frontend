@@ -6,10 +6,17 @@ import './UploadComponent.css';
 class UploadComponent extends Component {
 
   onDrop = (acceptedFiles) => {
-    if(this.props.header.articleId > 0)
+    if(this.articleWasCreated())
       this.postImage(acceptedFiles[0])
     else
       alert('Create an article first!')
+  }
+
+  articleWasCreated() {
+    if(this.props.header.articleId > 0)
+      return true
+    else 
+      return false
   }
 
   postImage(file) {
@@ -18,7 +25,7 @@ class UploadComponent extends Component {
     const {baseUrl, header} = this.props
     const endpoint = {baseUrl} + '/' + {header}.vignette + '/' +
       {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
-    axios.post(endpoint, formData, { 
+    axios.post(endpoint, formData, {
         headers: { "Content-Type": "multipart/form-data"}
       }).then((response) => { console.log(response) }
       ).catch(function (error) {
@@ -33,19 +40,25 @@ class UploadComponent extends Component {
   }
 
   render() {
+    const isCreated = this.articleWasCreated
     return (
-      <Dropzone onDrop={this.onDrop}>
-        {({getRootProps, getInputProps, isDragActive}) => (
-            <div {...getRootProps()} className="dropbox" 
-              role="region" name="dropbox">
-              <input {...getInputProps()} />
-              { isDragActive ?
-                <p>Drop the image here ...</p> :
-                <p>Drag 'n' drop image here, or click to select image</p>
-              }
-            </div>
-          )}
-    </Dropzone>
+      <>
+        {isCreated 
+          ? <h1>Article not yet saved</h1>
+          : <Dropzone onDrop={this.onDrop}>
+            {({getRootProps, getInputProps, isDragActive}) => (
+              <div {...getRootProps()} className="dropbox"
+                  role="region" name="dropbox">
+                <input {...getInputProps()} />
+                { isDragActive ?
+                  <p>Drop the image here ...</p> :
+                  <p>Drag 'n' drop image here, or click to select image</p>
+                }
+              </div>
+            )}
+          </Dropzone>
+        }
+      </>
     )
   }
 }

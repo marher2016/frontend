@@ -26,6 +26,7 @@ class ContentComponent extends Component {
   }
 
   handleSubmit = (e) => {
+    e.preventDefault();
     if (this.state.header.articleId.length > 0)
       this.handleOld()
     else
@@ -33,6 +34,7 @@ class ContentComponent extends Component {
   }
 
   handleOld() {
+    console.log(this.state)
     const {header, article} = this.state
     const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' +
     {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
@@ -40,6 +42,7 @@ class ContentComponent extends Component {
   }
 
   handleNew() {
+    console.log('new')
     axios.post(Environment.ARTICLES, this.state)
     .then(r => {
       this.setState({header: r.data.header})
