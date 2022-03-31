@@ -5,10 +5,6 @@ import './UploadComponent.css';
 
 class UploadComponent extends Component {
 
-  async componentDidUpdate() {
-    this.forceUpdate()
-  }
-
   onDrop = (acceptedFiles) => {
     this.postImage(acceptedFiles[0])
   }
@@ -34,11 +30,11 @@ class UploadComponent extends Component {
   }
 
   render() {
-    const isCreated = this.props.header.articleId > 0
+    const isCreated = typeof this.props.header != "undefined" && this.props.header.articleId > 0
     return (
       <>
-        {isCreated 
-          ? <Dropzone onDrop={this.onDrop}>
+        {isCreated ? 
+        <Dropzone onDrop={this.onDrop}>
           {({getRootProps, getInputProps, isDragActive}) => (
             <div {...getRootProps()} className="dropbox"
                 role="region" name="dropbox">
@@ -50,7 +46,7 @@ class UploadComponent extends Component {
             </div>
           )}
         </Dropzone>
-          : <h1>Article not yet saved</h1>
+          : <h1 name="no_article">Article not yet saved</h1>
         }
       </>
     )

@@ -16,7 +16,7 @@ class ContentComponent extends Component {
     super(props)
 
     this.state = {
-      header: new Header('ekonomi', 2022, 'inrikes', ''),
+      header: new Header('ekonomi', 2022, 'inrikes', -1),
       article: Article
     }
   }
