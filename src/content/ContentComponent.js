@@ -45,7 +45,15 @@ class ContentComponent extends Component {
     console.log('new')
     axios.post(Environment.ARTICLES, this.state)
     .then(r => {
+      console.log(r.data)
       this.setState({header: r.data.header})
+      this.setState({
+        article: new Article(
+            r.data.headline,
+            r.data.leader,
+            r.data.support
+          )
+      });
     })
   }
 
@@ -59,7 +67,7 @@ class ContentComponent extends Component {
         <SubmitComponent article={article} onChange={handleChange}
           onSubmit={handleSubmit}/>
       </div>
-      <ShowComponent header={header} environment={Environment}/>
+      <ShowComponent state={state} environment={Environment}/>
     </div>
     )
   }
