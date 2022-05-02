@@ -8,46 +8,44 @@ class SubmitComponent extends PureComponent {
     return (
       <form onSubmit={onSubmit} className="form">
         <div>
-          <label>Article Headline </label>
+          <label>Rubrik </label>
           <input
             className="input"
             type="text"
             name="headline"
-            placeholder="Enter headline here"
-            onChange= {onChange}
+            placeholder="Skriv rubrik här"
+            onChange={onChange}
             value={article.headline}>
           </input>
         </div>
         <div>
-          <label>-Lead paragraph </label>
+          <label>Ingress </label>
           <input
             className="input"
             type="text"
             name="leader"
             aria-label="leader"
-            placeholder="Enter lead here"
-            onChange= {onChange}
+            placeholder="Skriv ingress här"
+            onChange={onChange}
             value={article.leader}>
           </input>
         </div>
         <div>
-          <label>-Supporting paragraphs </label>
+          <label>Brödtext </label>
           <textarea
             className="input"
             name="support"
             aria-label="support"
-            placeholder="Enter supporting paragraphs here"
-            onChange= {onChange}
+            placeholder="Lägg in brödtext här"
+            onChange={onChange}
             value={article.support}>
           </textarea>
         </div>
-        <div>
-          <button
-            type="submit"
-            name="submit"
-            className="input button"
-          >Submit</button>
-        </div>
+        <button
+          type="submit"
+          name="submit"
+          className="input button"
+        >Förhandsgranska</button>
       </form>
     )
   }

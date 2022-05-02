@@ -40,13 +40,41 @@ class UploadComponent extends Component {
                 role="region" name="dropbox">
               <input {...getInputProps()} />
               { isDragActive ?
-                <p>Drop the image here ...</p> :
-                <p>Drag 'n' drop image here, or click to select image</p>
+                <p>Släpp bilden här ...</p> :
+                <p>Klicka eller drag och släpp bilden här</p>
               }
+              <form className="form">
+                <div>
+                  <label>Rubrik </label>
+                  <input
+                    className="input"
+                    type="text"
+                    name="headline"
+                    placeholder="Skriv rubrik här"
+                  >
+                  </input>
+                </div>
+                <div>
+                  <label>Ingress </label>
+                  <input
+                    className="input"
+                    type="text"
+                    name="leader"
+                    aria-label="leader"
+                    placeholder="Skriv ingress här">
+                  </input>
+                </div>
+                <button
+                  type="submit"
+                  name="submit"
+                  className="input button"
+                  >Förhandsgranska
+                </button>
+              </form>
             </div>
           )}
         </Dropzone>
-          : <h1 name="no_article">Article not yet saved</h1>
+          : <h1 name="no_article">Lägg först in en artikel nedan</h1>
         }
       </>
     )

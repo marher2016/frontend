@@ -15,8 +15,6 @@ class ShowComponent extends Component {
 
   async componentDidUpdate() {
     if(this.props.state.header.articleId > 0 && this.state.images.length === 0) {
-      const {header} = this.props.state.header
-      console.log(header)
       fetch(this.props.environment.IMAGES)
       .then(response => response.json())
       .then(images => this.setState({images}))
