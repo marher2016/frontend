@@ -3,6 +3,7 @@ import SubmitComponent from './submit/SubmitComponent';
 import './ContentComponent.css';
 import ShowComponent from './show/ShowComponent';
 import UploadComponent from './upload/UploadComponent'
+import LoadComponent from './load/LoadComponent';
 import { Component } from 'react';
 import axios from "axios";
 import Environment from '../environment/Environment'
@@ -15,11 +16,14 @@ class ContentComponent extends Component {
     super(props)
 
     this.state = {
-      header: new Header('INRIKES', 2022, 'ekonomi', -1),
       formatted: Article,
       headline: '',
       leader: '',
-      support: ''
+      support: '',
+      category: 'INRIKES',
+      pubYear: 2022,
+      vignette: 'ekonomi',
+      articleId: -1
     }
   }
 
@@ -29,7 +33,7 @@ class ContentComponent extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.header.articleId.length > 0)
+    if (this.state.articleId.length > 0)
       this.handleOld()
     else
       this.handleNew()
@@ -37,20 +41,22 @@ class ContentComponent extends Component {
 
   handleOld() {
     console.log(this.state)
-    const {header, headline, leader, support} = this.state
-    const endpoint = Environment.ARTICLES + '/' + header.category + '/' +
-      header.pubYear + '/' + header.vignette + '/' + header.articleId
+    const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
+    const endpoint = Environment.ARTICLES + '/' + category + '/' +
+      pubYear + '/' + vignette + '/' + articleId
     axios.put(endpoint, new Article(headline, leader, support))
   }
 
   handleNew() {
-    console.log(this.state)
-    const {header, headline, leader, support} = this.state
-    const draft = {header: header, headline: headline, leader: leader, support: support}
+    const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
+    const draft = {header: new Header(category, pubYear, vignette, articleId), 
+      headline: headline, leader: leader, support: support}
     axios.post(Environment.ARTICLES, draft)
     .then(r => {
-      console.log(r.data.header)
-      this.setState({header: r.data.header})
+      this.setState({category: r.data.header.category})
+      this.setState({pubYear: r.data.header.pubYear})
+      this.setState({vignette: r.data.header.vignette})
+      this.setState({articleId: r.data.header.articleId})
       this.setState({
         formatted: new Article(
             r.data.headline,
@@ -72,11 +78,24 @@ class ContentComponent extends Component {
 
   render() {
     const {handleChange, handleSubmit, state} = this
-    const {header, headline, leader, support, formatted} = state
+    const {headline, leader, support, formatted, category, pubYear, vignette, articleId} = state
     return (
     <div className="row">
       <div className="left column">
-        <UploadComponent header={header} baseUrl={Environment.IMAGES}/>
+        <LoadComponent
+          category={category} 
+          pubYear={pubYear}
+          vignette={vignette}
+          articleId={articleId}
+          onChange={handleChange}
+        />
+        <UploadComponent 
+          category={category} 
+          pubYear={pubYear}
+          vignette={vignette}
+          articleId={articleId}
+          baseUrl={Environment.IMAGES}
+        />
         <SubmitComponent
           headline={headline}
           leader={leader}
@@ -85,7 +104,11 @@ class ContentComponent extends Component {
           onSubmit={handleSubmit}/>
       </div>
       <div className="right column">
-        <ShowComponent header={header} formatted={formatted} environment={Environment}/>
+        <ShowComponent 
+          articleId={articleId} 
+          formatted={formatted} 
+          environment={Environment}
+        />
       </div>
     </div>
     )

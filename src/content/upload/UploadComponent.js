@@ -12,10 +12,9 @@ class UploadComponent extends Component {
   postImage(file) {
     const formData = new FormData()
     formData.append("file", file)
-    const {baseUrl, header} = this.props
-    const endpoint = baseUrl + '/' + header.category + '/' +
-      header.pubYear + '/' + header.vignette + '/' + header.articleId;
-    console.log(endpoint)
+    const {baseUrl, category, pubYear, vignette, articleId} = this.props
+    const endpoint = baseUrl + '/' + category + '/' +
+      pubYear + '/' + vignette + '/' + articleId;
     axios.post(endpoint, formData, {
         headers: { "Content-Type": "multipart/form-data"}
       }).then((response) => { console.log(response) }
@@ -32,7 +31,7 @@ class UploadComponent extends Component {
   }
 
   render() {
-    const isCreated = typeof this.props.header != "undefined" && this.props.header.articleId > 0
+    const isCreated = this.props.articleId > 0
     return (
       <>
         {isCreated ? 
