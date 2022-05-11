@@ -4,7 +4,7 @@ import './TextComponent.css';
 class TextComponent extends PureComponent {
 
   render() {
-    const {headline, leader, support} = this.props.article
+    const {headline, leader, support} = this.props.formatted
     return (
       <div className="article">
         <h1 className="headline">{headline}</h1>

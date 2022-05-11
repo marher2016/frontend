@@ -16,7 +16,10 @@ class ContentComponent extends Component {
 
     this.state = {
       header: new Header('ekonomi', 2022, 'inrikes', -1),
-      article: Article
+      formatted: Article,
+      headline: '',
+      leader: '',
+      support: ''
     }
   }
 
@@ -34,40 +37,51 @@ class ContentComponent extends Component {
 
   handleOld() {
     console.log(this.state)
-    const {header, article} = this.state
+    const {header, headline, leader, support} = this.state
     const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' +
     {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
-    axios.put(endpoint, article)
+    axios.put(endpoint, new Article(headline, leader, support))
   }
 
   handleNew() {
     console.log('new')
-    axios.post(Environment.ARTICLES, this.state)
+    const {header, headline, leader, support} = this.state
+    const draft = {header: header, headline: headline, leader: leader, support: support}
+    axios.post(Environment.ARTICLES, draft)
     .then(r => {
       console.log(r.data)
       this.setState({header: r.data.header})
       this.setState({
-        article: new Article(
+        formatted: new Article(
             r.data.headline,
             r.data.leader,
             r.data.support
           )
       });
+    }).catch(function (error) {
+      if (error.response) {
+        console.log(error)
+        alert('Bad article: ' + error.response.data.message);
+      } else if (error.request) {
+        alert('No response: ' + error.request);
+      } else {
+        alert('Error during setup: ', error.message);
+      }
     })
   }
 
   render() {
     const {handleChange, handleSubmit, state} = this
-    const {header, article} = state
+    const {header, headline, leader, support, formatted} = state
     return (
     <div className="row">
       <div className="left column">
         <UploadComponent header={header} baseUrl={Environment.IMAGES}/>
-        <SubmitComponent article={article} onChange={handleChange}
+        <SubmitComponent headline={headline} leader={leader} support={support} onChange={handleChange}
           onSubmit={handleSubmit}/>
       </div>
       <div className="right column">
-        <ShowComponent state={state} environment={Environment}/>
+        <ShowComponent header={header} formatted={formatted} environment={Environment}/>
       </div>
     </div>
     )

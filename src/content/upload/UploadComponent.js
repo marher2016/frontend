@@ -20,6 +20,7 @@ class UploadComponent extends Component {
       }).then((response) => { console.log(response) }
       ).catch(function (error) {
       if (error.response) {
+        console.log(error)
         alert('Bad file: ' + error.response.data.message);
       } else if (error.request) {
         alert('No response: ' + error.request);

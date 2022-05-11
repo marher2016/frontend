@@ -4,7 +4,7 @@ import './SubmitComponent.css';
 class SubmitComponent extends PureComponent {
 
   render() {
-    const {article, onChange, onSubmit} = this.props
+    const {headline, leader, support, onChange, onSubmit} = this.props
     return (
       <form onSubmit={onSubmit} className="form">
         <div>
@@ -15,7 +15,7 @@ class SubmitComponent extends PureComponent {
             name="headline"
             placeholder="Skriv rubrik här"
             onChange={onChange}
-            value={article.headline}>
+            value={headline}>
           </input>
         </div>
         <div>
@@ -27,7 +27,7 @@ class SubmitComponent extends PureComponent {
             aria-label="leader"
             placeholder="Skriv ingress här"
             onChange={onChange}
-            value={article.leader}>
+            value={leader}>
           </input>
         </div>
         <div>
@@ -38,7 +38,7 @@ class SubmitComponent extends PureComponent {
             aria-label="support"
             placeholder="Lägg in brödtext här"
             onChange={onChange}
-            value={article.support}>
+            value={support}>
           </textarea>
         </div>
         <button
