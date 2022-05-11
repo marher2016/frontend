@@ -13,8 +13,9 @@ class UploadComponent extends Component {
     const formData = new FormData()
     formData.append("file", file)
     const {baseUrl, header} = this.props
-    const endpoint = {baseUrl} + '/' + {header}.vignette + '/' +
-      {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
+    const endpoint = baseUrl + '/' + header.category + '/' +
+      header.pubYear + '/' + header.vignette + '/' + header.articleId;
+    console.log(endpoint)
     axios.post(endpoint, formData, {
         headers: { "Content-Type": "multipart/form-data"}
       }).then((response) => { console.log(response) }

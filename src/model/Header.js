@@ -1,6 +1,6 @@
 export class Header {
-  constructor(subject, pubYear, vignette, articleId) {
-    this.subject = subject
+  constructor(category, pubYear, vignette, articleId) {
+    this.category = category
     this.pubYear = pubYear
     this.vignette = vignette
     this.articleId = articleId

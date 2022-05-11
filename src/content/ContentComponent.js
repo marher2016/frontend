@@ -15,7 +15,7 @@ class ContentComponent extends Component {
     super(props)
 
     this.state = {
-      header: new Header('ekonomi', 2022, 'inrikes', -1),
+      header: new Header('INRIKES', 2022, 'ekonomi', -1),
       formatted: Article,
       headline: '',
       leader: '',
@@ -38,18 +38,18 @@ class ContentComponent extends Component {
   handleOld() {
     console.log(this.state)
     const {header, headline, leader, support} = this.state
-    const endpoint = Environment.ARTICLES + '/' + {header}.vignette + '/' +
-    {header}.pubYear + '/' + {header}.subject + '/' + {header}.articleId
+    const endpoint = Environment.ARTICLES + '/' + header.category + '/' +
+      header.pubYear + '/' + header.vignette + '/' + header.articleId
     axios.put(endpoint, new Article(headline, leader, support))
   }
 
   handleNew() {
-    console.log('new')
+    console.log(this.state)
     const {header, headline, leader, support} = this.state
     const draft = {header: header, headline: headline, leader: leader, support: support}
     axios.post(Environment.ARTICLES, draft)
     .then(r => {
-      console.log(r.data)
+      console.log(r.data.header)
       this.setState({header: r.data.header})
       this.setState({
         formatted: new Article(
@@ -77,7 +77,11 @@ class ContentComponent extends Component {
     <div className="row">
       <div className="left column">
         <UploadComponent header={header} baseUrl={Environment.IMAGES}/>
-        <SubmitComponent headline={headline} leader={leader} support={support} onChange={handleChange}
+        <SubmitComponent
+          headline={headline}
+          leader={leader}
+          support={support}
+          onChange={handleChange}
           onSubmit={handleSubmit}/>
       </div>
       <div className="right column">
