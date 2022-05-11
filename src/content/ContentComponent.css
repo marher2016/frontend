@@ -1,3 +1,11 @@
+.column {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+}
+
 .row {
   text-align: left;
   display: flex;
@@ -7,5 +15,9 @@
 }
 
 .left {
-  height: 1000px;
+  height: 333px;
+}
+
+.right {
+  font-size: 3.5px
 }

@@ -1,3 +1,12 @@
-.dropbox {
-  font-size: 3em
+p, h1 {
+  font-size: 1em
+}
+
+.input {
+  font-size: 1em;
+  padding-top: 1em
+}
+
+.button {
+  width: 19.12em
 }

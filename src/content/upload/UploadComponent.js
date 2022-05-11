@@ -45,30 +45,30 @@ class UploadComponent extends Component {
               }
               <form className="form">
                 <div>
-                  <label>Rubrik </label>
+                  <label>Bildtext </label>
                   <input
                     className="input"
                     type="text"
                     name="headline"
-                    placeholder="Skriv rubrik här"
+                    placeholder="Skriv bildtext här"
                   >
                   </input>
                 </div>
                 <div>
-                  <label>Ingress </label>
+                  <label>Bildcredit </label>
                   <input
                     className="input"
                     type="text"
                     name="leader"
                     aria-label="leader"
-                    placeholder="Skriv ingress här">
+                    placeholder="Skriv bildcredit här">
                   </input>
                 </div>
                 <button
                   type="submit"
                   name="submit"
                   className="input button"
-                  >Förhandsgranska
+                  >Uppdatera bildtexten
                 </button>
               </form>
             </div>

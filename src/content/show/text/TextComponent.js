@@ -8,7 +8,7 @@ class TextComponent extends PureComponent {
     return (
       <div className="article">
         <h1 className="headline">{headline}</h1>
-        <strong>{leader}</strong>
+        <strong className="lead">{leader}</strong>
         <pre>{support}</pre>
       </div>
     )

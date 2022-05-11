@@ -1,7 +1,6 @@
 import React from 'react';
 import SubmitComponent from './submit/SubmitComponent';
 import './ContentComponent.css';
-import '../App.css';
 import ShowComponent from './show/ShowComponent';
 import UploadComponent from './upload/UploadComponent'
 import { Component } from 'react';
@@ -67,7 +66,9 @@ class ContentComponent extends Component {
         <SubmitComponent article={article} onChange={handleChange}
           onSubmit={handleSubmit}/>
       </div>
-      <ShowComponent state={state} environment={Environment}/>
+      <div className="right column">
+        <ShowComponent state={state} environment={Environment}/>
+      </div>
     </div>
     )
   }

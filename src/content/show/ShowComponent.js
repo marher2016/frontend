@@ -1,7 +1,6 @@
 import { Component } from "react";
 import TextComponent from "./text/TextComponent";
 import ImageComponent from "./image/ImageComponent";
-import '../../App.css';
 
 class ShowComponent extends Component {
   
@@ -24,10 +23,10 @@ class ShowComponent extends Component {
 
   render() {
     return (
-      <div className="column">
+      <>
         <ImageComponent images={this.state.images} />
         <TextComponent article={this.props.state.article} />
-      </div>
+      </>
     )
   }
 }
