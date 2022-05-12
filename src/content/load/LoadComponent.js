@@ -3,9 +3,9 @@ import { PureComponent } from "react";
 class LoadComponent extends PureComponent {
 
   render() {
-    const {category, pubYear, vignette, articleId, onChange} = this.props
+    const {category, pubYear, vignette, articleId, onChange, onLoad} = this.props
     return (
-      <>
+      <form onSubmit={onLoad} className="form">
         <div>
           <label>Kategori </label>
           <select
@@ -47,7 +47,12 @@ class LoadComponent extends PureComponent {
             value={articleId}>
           </input>
         </div>
-      </>
+        <button
+          type="submit"
+          name="submit"
+          className="input button"
+        >Byt artikel</button>
+      </form>
     )
   }
 }

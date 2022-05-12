@@ -31,6 +31,36 @@ class ContentComponent extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleLoad = (e) => {
+    e.preventDefault();
+    const {category, pubYear, vignette, articleId} = this.state
+    const article = Environment.ARTICLES + '/' + category + '/' + pubYear + '/' + vignette + '/' + articleId
+    axios.get(article)
+    .then(r => {
+      console.log(r)
+      this.setState({category: r.data.header.category})
+      this.setState({pubYear: r.data.header.pubYear})
+      this.setState({vignette: r.data.header.vignette})
+      this.setState({articleId: r.data.header.articleId})
+      this.setState({
+        formatted: new Article(
+            r.data.headline,
+            r.data.leader,
+            r.data.support
+          )
+      });
+    }).catch(function (error) {
+      if (error.response) {
+        console.log(error)
+        alert('Bad article: ' + error.response.data.message);
+      } else if (error.request) {
+        alert('No response: ' + error.request);
+      } else {
+        alert('Error during setup: ', error.message);
+      }
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.articleId.length > 0)
@@ -49,7 +79,7 @@ class ContentComponent extends Component {
 
   handleNew() {
     const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
-    const draft = {header: new Header(category, pubYear, vignette, articleId), 
+    const draft = {header: new Header(category, pubYear, vignette, articleId),
       headline: headline, leader: leader, support: support}
     axios.post(Environment.ARTICLES, draft)
     .then(r => {
@@ -77,20 +107,21 @@ class ContentComponent extends Component {
   }
 
   render() {
-    const {handleChange, handleSubmit, state} = this
+    const {handleChange, handleLoad, handleSubmit, state} = this
     const {headline, leader, support, formatted, category, pubYear, vignette, articleId} = state
     return (
     <div className="row">
       <div className="left column">
         <LoadComponent
-          category={category} 
+          category={category}
           pubYear={pubYear}
           vignette={vignette}
           articleId={articleId}
           onChange={handleChange}
+          onLoad={handleLoad}
         />
-        <UploadComponent 
-          category={category} 
+        <UploadComponent
+          category={category}
           pubYear={pubYear}
           vignette={vignette}
           articleId={articleId}
@@ -101,12 +132,13 @@ class ContentComponent extends Component {
           leader={leader}
           support={support}
           onChange={handleChange}
-          onSubmit={handleSubmit}/>
+          onSubmit={handleSubmit}
+        />
       </div>
       <div className="right column">
-        <ShowComponent 
-          articleId={articleId} 
-          formatted={formatted} 
+        <ShowComponent
+          articleId={articleId}
+          formatted={formatted}
           environment={Environment}
         />
       </div>

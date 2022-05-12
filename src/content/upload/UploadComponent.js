@@ -75,7 +75,7 @@ class UploadComponent extends Component {
             </div>
           )}
         </Dropzone>
-          : <h1 name="no_article">Lägg först in en artikel nedan</h1>
+          : <h1 name="no_article">Byt artikel eller skriv ny artikel nedan</h1>
         }
       </>
     )
