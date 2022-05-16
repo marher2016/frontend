@@ -1,6 +1,7 @@
 import { Component } from "react";
 import TextComponent from "./text/TextComponent";
 import ImageComponent from "./image/ImageComponent";
+import VignetteComponent from "./vignette/VignetteComponent";
 
 class ShowComponent extends Component {
   
@@ -24,6 +25,7 @@ class ShowComponent extends Component {
   render() {
     return (
       <>
+        <VignetteComponent vignette={this.props.vignette} formatted={this.props.formatted} />
         <ImageComponent images={this.state.images} />
         <TextComponent formatted={this.props.formatted} />
       </>

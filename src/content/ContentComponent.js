@@ -16,14 +16,14 @@ class ContentComponent extends Component {
     super(props)
 
     this.state = {
-      formatted: Article,
+      formatted: '',
       headline: '',
       leader: '',
       support: '',
       category: 'INRIKES',
       pubYear: 2022,
-      vignette: 'ekonomi',
-      articleId: -1
+      vignette: 'politik',
+      articleId: 9839
     }
   }
 
@@ -140,6 +140,7 @@ class ContentComponent extends Component {
           articleId={articleId}
           formatted={formatted}
           environment={Environment}
+          vignette={vignette}
         />
       </div>
     </div>
