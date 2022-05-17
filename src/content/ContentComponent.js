@@ -133,6 +133,7 @@ class ContentComponent extends Component {
           support={support}
           onChange={handleChange}
           onSubmit={handleSubmit}
+          articleId={articleId}
         />
       </div>
       <div className="right column">

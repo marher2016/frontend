@@ -51,7 +51,7 @@ class LoadComponent extends PureComponent {
           type="submit"
           name="submit"
           className="input button"
-        >Byt artikel</button>
+        >Förhandsgranska</button>
       </form>
     )
   }

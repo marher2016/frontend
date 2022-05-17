@@ -4,7 +4,7 @@ import './SubmitComponent.css';
 class SubmitComponent extends PureComponent {
 
   render() {
-    const {headline, leader, support, onChange, onSubmit} = this.props
+    const {headline, leader, support, onChange, onSubmit, articleId} = this.props
     return (
       <form onSubmit={onSubmit} className="form">
         <div>
@@ -45,7 +45,7 @@ class SubmitComponent extends PureComponent {
           type="submit"
           name="submit"
           className="input button"
-        >Förhandsgranska</button>
+        >{articleId ? 'Uppdatera' : 'Skapa artikel'}</button>
       </form>
     )
   }
