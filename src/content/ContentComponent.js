@@ -23,7 +23,8 @@ class ContentComponent extends Component {
       category: 'INRIKES',
       pubYear: 2022,
       vignette: 'politik',
-      articleId: 9839
+      articleId: 9839,
+      oldArticleId: 9839,
     }
   }
 
@@ -37,11 +38,6 @@ class ContentComponent extends Component {
     const article = Environment.ARTICLES + '/' + category + '/' + pubYear + '/' + vignette + '/' + articleId
     axios.get(article)
     .then(r => {
-      console.log(r)
-      this.setState({category: r.data.header.category})
-      this.setState({pubYear: r.data.header.pubYear})
-      this.setState({vignette: r.data.header.vignette})
-      this.setState({articleId: r.data.header.articleId})
       this.setState({
         formatted: new Article(
             r.data.headline,
@@ -63,14 +59,13 @@ class ContentComponent extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.articleId.length > 0)
+    if (this.state.oldArticleId === this.state.articleId)
       this.handleOld()
     else
       this.handleNew()
   }
 
   handleOld() {
-    console.log(this.state)
     const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
     const endpoint = Environment.ARTICLES + '/' + category + '/' +
       pubYear + '/' + vignette + '/' + articleId
@@ -78,6 +73,7 @@ class ContentComponent extends Component {
   }
 
   handleNew() {
+    this.setState({oldArticleId: this.state.articleId})
     const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
     const draft = {header: new Header(category, pubYear, vignette, articleId),
       headline: headline, leader: leader, support: support}
@@ -108,7 +104,7 @@ class ContentComponent extends Component {
 
   render() {
     const {handleChange, handleLoad, handleSubmit, state} = this
-    const {headline, leader, support, formatted, category, pubYear, vignette, articleId} = state
+    const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId} = state
     return (
     <div className="row">
       <div className="left column">
@@ -125,6 +121,7 @@ class ContentComponent extends Component {
           pubYear={pubYear}
           vignette={vignette}
           articleId={articleId}
+          oldArticleId={oldArticleId}
           baseUrl={Environment.IMAGES}
         />
         <SubmitComponent
@@ -134,6 +131,7 @@ class ContentComponent extends Component {
           onChange={handleChange}
           onSubmit={handleSubmit}
           articleId={articleId}
+          oldArticleId={oldArticleId}
         />
       </div>
       <div className="right column">

@@ -31,10 +31,11 @@ class UploadComponent extends Component {
   }
 
   render() {
-    const isCreated = this.props.articleId > 0
+    const {articleId, oldArticleId} = this.props
+    const isOld = articleId > -1 & articleId === oldArticleId
     return (
       <>
-        {isCreated ? 
+        {isOld ? 
         <Dropzone onDrop={this.onDrop}>
           {({getRootProps, getInputProps, isDragActive}) => (
             <div {...getRootProps()} className="dropbox"
