@@ -1,7 +1,7 @@
-import { PureComponent } from "react";
+import { Component } from "react";
 import './ImageComponent.css';
 
-class ImageComponent extends PureComponent {
+class ImageComponent extends Component {
 
   render() {
     return this.props.images.map((image) => {

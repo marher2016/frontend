@@ -29,12 +29,16 @@ class ContentComponent extends Component {
     }
   }
 
+  loadImages() {
+    fetch(Environment.IMAGES)
+    .then(response => response.json())
+    .then(images => this.setState({images}))
+    .catch(error => console.log(error))
+  }
+
   async componentDidUpdate() {
     if(this.state.articleId > 0 && this.state.images.length === 0) {
-      fetch(Environment.IMAGES)
-      .then(response => response.json())
-      .then(images => this.setState({images}))
-      .catch(error => console.log(error))
+      this.loadImages()
     }
   }
 
@@ -143,6 +147,7 @@ class ContentComponent extends Component {
         alert('Error during setup: ', error.message);
       }
     })
+    this.loadImages()
   }
 
   render() {

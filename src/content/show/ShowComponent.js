@@ -1,9 +1,9 @@
-import { PureComponent } from "react";
+import { Component } from "react";
 import TextComponent from "./text/TextComponent";
 import ImageComponent from "./image/ImageComponent";
 import VignetteComponent from "./vignette/VignetteComponent";
 
-class ShowComponent extends PureComponent {
+class ShowComponent extends Component {
 
   render() {
     return (
