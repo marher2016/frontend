@@ -102,8 +102,41 @@ class ContentComponent extends Component {
     })
   }
 
+  handleUpload = (file) => {
+    const formData = new FormData()
+    formData.append("file", file)
+    const {category, pubYear, vignette, articleId} = this.state
+    axios.delete(Environment.IMAGES)
+      .then((response) => { console.log(response) })
+      .catch(function (error) {
+      if (error.response) {
+        console.log(error)
+        alert('Bad file: ' + error.response.data.message);
+      } else if (error.request) {
+        alert('No response: ' + error.request);
+      } else {
+        alert('Error during setup: ', error.message);
+      }
+    })
+    const endpoint = Environment.IMAGES + '/' + category + '/' +
+      pubYear + '/' + vignette + '/' + articleId;
+    axios.post(endpoint, formData, {
+        headers: { "Content-Type": "multipart/form-data"}})
+        .then((response) => { console.log(response) })
+        .catch(function (error) {
+      if (error.response) {
+        console.log(error)
+        alert('Bad file: ' + error.response.data.message);
+      } else if (error.request) {
+        alert('No response: ' + error.request);
+      } else {
+        alert('Error during setup: ', error.message);
+      }
+    })
+  }
+
   render() {
-    const {handleChange, handleLoad, handleSubmit, state} = this
+    const {handleChange, handleLoad, handleSubmit, state, handleUpload} = this
     const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId} = state
     return (
     <div className="row">
@@ -123,6 +156,7 @@ class ContentComponent extends Component {
           articleId={articleId}
           oldArticleId={oldArticleId}
           baseUrl={Environment.IMAGES}
+          onUpload={handleUpload}
         />
         <SubmitComponent
           headline={headline}

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Component } from "react";
 import Dropzone from 'react-dropzone'
 import './UploadComponent.css';
@@ -6,37 +5,16 @@ import './UploadComponent.css';
 class UploadComponent extends Component {
 
   onDrop = (acceptedFiles) => {
-    this.postImage(acceptedFiles[0])
-  }
-
-  postImage(file) {
-    const formData = new FormData()
-    formData.append("file", file)
-    const {baseUrl, category, pubYear, vignette, articleId} = this.props
-    const endpoint = baseUrl + '/' + category + '/' +
-      pubYear + '/' + vignette + '/' + articleId;
-    axios.post(endpoint, formData, {
-        headers: { "Content-Type": "multipart/form-data"}
-      }).then((response) => { console.log(response) }
-      ).catch(function (error) {
-      if (error.response) {
-        console.log(error)
-        alert('Bad file: ' + error.response.data.message);
-      } else if (error.request) {
-        alert('No response: ' + error.request);
-      } else {
-        alert('Error during setup: ', error.message);
-      }
-    })
+    this.props.onUpload(acceptedFiles[0])
   }
 
   render() {
-    const {articleId, oldArticleId} = this.props
+    const {articleId, oldArticleId, onUpload} = this.props
     const isOld = articleId > -1 & articleId === oldArticleId
     return (
       <>
         {isOld ? 
-        <Dropzone onDrop={this.onDrop}>
+        <Dropzone onDrop={(acceptedFiles) => onUpload(acceptedFiles[0])}>
           {({getRootProps, getInputProps, isDragActive}) => (
             <div {...getRootProps()} className="dropbox"
                 role="region" name="dropbox">
