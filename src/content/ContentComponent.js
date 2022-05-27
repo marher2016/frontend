@@ -150,12 +150,8 @@ class ContentComponent extends Component {
           onLoad={handleLoad}
         />
         <UploadComponent
-          category={category}
-          pubYear={pubYear}
-          vignette={vignette}
           articleId={articleId}
           oldArticleId={oldArticleId}
-          baseUrl={Environment.IMAGES}
           onUpload={handleUpload}
         />
         <SubmitComponent
