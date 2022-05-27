@@ -25,6 +25,16 @@ class ContentComponent extends Component {
       vignette: 'politik',
       articleId: 9839,
       oldArticleId: 9839,
+      images: [],
+    }
+  }
+
+  async componentDidUpdate() {
+    if(this.state.articleId > 0 && this.state.images.length === 0) {
+      fetch(Environment.IMAGES)
+      .then(response => response.json())
+      .then(images => this.setState({images}))
+      .catch(error => console.log(error))
     }
   }
 
@@ -137,7 +147,7 @@ class ContentComponent extends Component {
 
   render() {
     const {handleChange, handleLoad, handleSubmit, state, handleUpload} = this
-    const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId} = state
+    const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId, images} = state
     return (
     <div className="row">
       <div className="left column">
@@ -170,6 +180,7 @@ class ContentComponent extends Component {
           formatted={formatted}
           environment={Environment}
           vignette={vignette}
+          images={images}
         />
       </div>
     </div>
