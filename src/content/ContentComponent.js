@@ -153,6 +153,7 @@ class ContentComponent extends Component {
   render() {
     const {handleChange, handleLoad, handleSubmit, state, handleUpload} = this
     const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId, images} = state
+    const isOld = articleId > -1 & articleId === oldArticleId
     return (
     <div className="row">
       <div className="left column">
@@ -165,8 +166,7 @@ class ContentComponent extends Component {
           onLoad={handleLoad}
         />
         <UploadComponent
-          articleId={articleId}
-          oldArticleId={oldArticleId}
+          isOld={isOld}
           onUpload={handleUpload}
         />
         <SubmitComponent
@@ -175,15 +175,12 @@ class ContentComponent extends Component {
           support={support}
           onChange={handleChange}
           onSubmit={handleSubmit}
-          articleId={articleId}
-          oldArticleId={oldArticleId}
+          isOld={isOld}
         />
       </div>
       <div className="right column">
         <ShowComponent
-          articleId={articleId}
           formatted={formatted}
-          environment={Environment}
           vignette={vignette}
           images={images}
         />

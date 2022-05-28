@@ -9,8 +9,7 @@ class UploadComponent extends Component {
   }
 
   render() {
-    const {articleId, oldArticleId, onUpload} = this.props
-    const isOld = articleId > -1 & articleId === oldArticleId
+    const {isOld, onUpload} = this.props
     return (
       <>
         {isOld ? 
