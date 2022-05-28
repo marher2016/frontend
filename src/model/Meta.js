@@ -1,7 +1,7 @@
 export class Meta {
-  constructor(contentMd5, eTag, versionId) {
+  constructor(contentMd5, versionId, eTag) {
     this.contentMd5 = contentMd5
-    this.eTag = eTag
     this.versionId = versionId
+    this.eTag = eTag
   }
 }

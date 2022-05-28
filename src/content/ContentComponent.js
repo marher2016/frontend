@@ -120,18 +120,6 @@ class ContentComponent extends Component {
     const formData = new FormData()
     formData.append("file", file)
     const {category, pubYear, vignette, articleId} = this.state
-    axios.delete(Environment.IMAGES)
-      .then((response) => { console.log(response) })
-      .catch(function (error) {
-      if (error.response) {
-        console.log(error)
-        alert('Bad file: ' + error.response.data.message);
-      } else if (error.request) {
-        alert('No response: ' + error.request);
-      } else {
-        alert('Error during setup: ', error.message);
-      }
-    })
     const endpoint = Environment.IMAGES + '/' + category + '/' +
       pubYear + '/' + vignette + '/' + articleId;
     axios.post(endpoint, formData, {
