@@ -4,9 +4,7 @@ import './ImageComponent.css';
 class ImageComponent extends Component {
 
   render() {
-    const {images, formatted} = this.props
-    const image = images[0]
-    console.log(image)
+    const {image, formatted} = this.props
     return (
       formatted ? image ?
       <div key={image.time}>

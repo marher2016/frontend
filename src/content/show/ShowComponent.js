@@ -6,12 +6,15 @@ import VignetteComponent from "./vignette/VignetteComponent";
 class ShowComponent extends Component {
 
   render() {
+    const {vignette, formatted, image, isOld} = this.props
     return (
-      <>
-        <VignetteComponent vignette={this.props.vignette} formatted={this.props.formatted} />
-        <ImageComponent images={this.props.images} formatted={this.props.formatted}/>
-        <TextComponent formatted={this.props.formatted} />
-      </>
+      isOld ?
+        <>
+          <VignetteComponent vignette={vignette} formatted={formatted} />
+          <ImageComponent image={image} formatted={formatted}/>
+          <TextComponent formatted={formatted} />
+        </>
+        : null
     )
   }
 }

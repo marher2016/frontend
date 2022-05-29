@@ -58,7 +58,8 @@ class ContentComponent extends Component {
             r.data.leader,
             r.data.support
           )
-      });
+      })
+      this.setState({images: []});
     }).catch(function (error) {
       if (error.response) {
         console.log(error)
@@ -72,21 +73,23 @@ class ContentComponent extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
     if (this.state.oldArticleId === this.state.articleId)
       this.handleOld()
     else
-      this.handleNew()
+      this.handleNew(e)
   }
 
   handleOld() {
+    console.log('old')
     const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
     const endpoint = Environment.ARTICLES + '/' + category + '/' +
       pubYear + '/' + vignette + '/' + articleId
     axios.put(endpoint, new Article(headline, leader, support))
   }
 
-  handleNew() {
+  handleNew(e) {
+    console.log('new')
+    e.preventDefault();
     this.setState({oldArticleId: this.state.articleId})
     const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
     const draft = {header: new Header(category, pubYear, vignette, articleId),
@@ -103,7 +106,8 @@ class ContentComponent extends Component {
             r.data.leader,
             r.data.support
           )
-      });
+      })
+      this.setState({images: []});
     }).catch(function (error) {
       if (error.response) {
         console.log(error)
@@ -170,7 +174,8 @@ class ContentComponent extends Component {
         <ShowComponent
           formatted={formatted}
           vignette={vignette}
-          images={images}
+          image={images.length ? images.reduce((p, c) => (p.time > c.time ? p : c)) : null}
+          isOld={isOld}
         />
       </div>
     </div>
