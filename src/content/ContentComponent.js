@@ -25,6 +25,7 @@ class ContentComponent extends Component {
       vignette: 'politik',
       articleId: 9839,
       oldArticleId: 9839,
+      oldVignette: 'politik',
       images: [],
     }
   }
@@ -48,6 +49,8 @@ class ContentComponent extends Component {
 
   handleLoad = (e) => {
     e.preventDefault();
+    this.setState({oldArticleId: this.state.articleId})
+    this.setState({oldVignette: this.state.vignette})
     const {category, pubYear, vignette, articleId} = this.state
     const article = Environment.ARTICLES + '/' + category + '/' + pubYear + '/' + vignette + '/' + articleId
     axios.get(article)
@@ -73,7 +76,7 @@ class ContentComponent extends Component {
   }
 
   handleSubmit = (e) => {
-    if (this.state.oldArticleId === this.state.articleId)
+    if (this.state.oldArticleId === this.state.articleId & this.state.oldVignette === this.state.vignette)
       this.handleOld()
     else
       this.handleNew(e)
@@ -89,8 +92,9 @@ class ContentComponent extends Component {
 
   handleNew(e) {
     console.log('new')
-    e.preventDefault();
+    e.preventDefault()
     this.setState({oldArticleId: this.state.articleId})
+    this.setState({oldVignette: this.state.vignette})
     const {headline, leader, support, category, pubYear, vignette, articleId} = this.state
     const draft = {header: new Header(category, pubYear, vignette, articleId),
       headline: headline, leader: leader, support: support}
@@ -144,8 +148,8 @@ class ContentComponent extends Component {
 
   render() {
     const {handleChange, handleLoad, handleSubmit, state, handleUpload} = this
-    const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId, images} = state
-    const isOld = articleId > -1 & articleId === oldArticleId
+    const {headline, leader, support, formatted, category, pubYear, vignette, articleId, oldArticleId, oldVignette, images} = state
+    const isOld = articleId > -1 & articleId === oldArticleId & vignette === oldVignette
     return (
     <div className="row">
       <div className="left column">
